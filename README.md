@@ -11,7 +11,7 @@ This is a parser that extracts important information from a LinkedIn profile PDF
 ## Details
 The following are commands included in the Makefile:
 - `make develop`: install the library's dependencies using `pip`
-- `make lint`: perform static analysis of this library with `black`
+- `make lint`: perform static analysis of this library with `black` and `flake8`
 - `make format`: autoformat this library with `black`
 - `make test`: run automated tests with `pytest`
 - `make coverage`: run automated tests with `pytest` and collect coverage information (passes with coverage >50%)
