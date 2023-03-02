@@ -9,6 +9,7 @@ develop:  ## install dependencies
 #########
 lint:  ## run static analysis with black and flake8
 	python -m black --check parser.py test_all.py
+	python -m flake8 parser.py test_all.py
 
 # Alias
 lints: lint
