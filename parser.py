@@ -99,6 +99,39 @@ def get_languages(result_list, i):
             return languages, j + 1
 
 
+def get_many(result_list):
+    skills = []
+    languages = []
+    summary = []
+    certifications = []
+    honors = []
+    contact = []
+
+    res = {}
+    for i in range(len(result_list)):
+        if result_list[i] == "Contact":
+            contact, i = get_contact(result_list, i)
+        if result_list[i] == "Top Skills":
+            skills, i = get_skills(result_list, i)
+        if result_list[i] == "Certifications":
+            certifications, i = get_certifications(result_list, i)
+        if result_list[i] == "Honors-Awards":
+            honors, i = get_honors(result_list, i)
+        if result_list[i] == "Summary":
+            summary, i = get_summary(result_list, i)
+        if result_list[i] == "Languages":
+            languages, i = get_languages(result_list, i)
+
+    res["contact"] = contact
+    res["skills"] = skills
+    res["languages"] = languages
+    res["certifications"] = certifications
+    res["honors"] = honors
+    res["summary"] = summary
+
+    return res
+
+
 def main(argv):
     name = argv[1] + " " + argv[2]
     TAGS.add(name)
@@ -136,38 +169,7 @@ def main(argv):
         data = data.replace(i, "")
 
     result_list = data.split("\n")
-
-    skills = []
-    languages = []
-    summary = []
-    certifications = []
-    honors = []
-    contact = []
-
-    res = {}
-
-    for i in range(len(result_list)):
-        if result_list[i] == "Contact":
-            contact, i = get_contact(result_list, i)
-        if result_list[i] == "Top Skills":
-            skills, i = get_skills(result_list, i)
-        if result_list[i] == "Certifications":
-            certifications, i = get_certifications(result_list, i)
-        if result_list[i] == "Honors-Awards":
-            honors, i = get_honors(result_list, i)
-        if result_list[i] == "Summary":
-            summary, i = get_summary(result_list, i)
-        if result_list[i] == "Languages":
-            languages, i = get_languages(result_list, i)
-
-    res["contact"] = contact
-    res["skills"] = skills
-    res["languages"] = languages
-    res["certifications"] = certifications
-    res["honors"] = honors
-    res["summary"] = summary
-
-    return res
+    return get_many(result_list)
 
 
 if __name__ == "__main__":

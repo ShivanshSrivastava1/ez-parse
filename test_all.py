@@ -5,6 +5,7 @@ from parser import (
     get_honors,
     get_summary,
     get_languages,
+    get_many,
 )
 
 
@@ -44,7 +45,7 @@ def test_get_languages():
     assert get_languages(li, -1)[0] == res["languages"]
 
 
-def test_integrated():
+def test_get_many():
     li = [
         "Contact",
         "5202620535 ",
@@ -108,23 +109,30 @@ def test_integrated():
         "Vice President of Community",
         "February 2021-Present(2 years 2 months)",
         "New York City Metropolitan Area",
-        "- Interview and match 30+ MBA startup founders with 50+ undergrad and",
+        "- Interview and match 30+ MBA startup founders with 50+ \
+            undergrad and",
         "graduate SWE, PD, and PM interns each semester",
-        "- Manage a semester budget of $144k to pay student interns and organize",
+        "- Manage a semester budget of $144k to pay student interns \
+            and organize",
         "workshops and networking events",
-        "- Work with the Eugene M. Lang Entrepreneurship Center and the CS",
+        "- Work with the Eugene M. Lang Entrepreneurship Center and \
+            the CS",
         "Department to design academic guidelines for students",
         "",
         "Skye",
         "Software Engineer",
         "February 2021-May 2022(1 year 4 months)",
         "New York City Metropolitan Area",
-        "- Develop a full-stack web application for professional coaching services",
-        "- Implement Firebase back-end infrastructure for the React web app’s server to",
+        "- Develop a full-stack web application for professional \
+            coaching services",
+        "- Implement Firebase back-end infrastructure for the React \
+            web app’s server to",
         "reduce costs",
-        "- Design a novel matching algorithm to match 80+ clients to their personalized",
+        "- Design a novel matching algorithm to match 80+ clients to \
+            their personalized",
         "coaches",
-        "- Clean data from 6700+ schools in the U.S. to train the matching algorithm on",
+        "- Clean data from 6700+ schools in the U.S. to train the matching \
+            algorithm on",
         "",
         "Page 1 of 2",
         "",
@@ -145,34 +153,7 @@ def test_integrated():
         "",
         "",
     ]
-    skills = []
-    languages = []
-    summary = []
-    certifications = []
-    honors = []
-    contact = []
-    res = {}
-
-    for i in range(len(li)):
-        if li[i] == "Contact":
-            contact, i = get_contact(li, i)
-        if li[i] == "Top Skills":
-            skills, i = get_skills(li, i)
-        if li[i] == "Certifications":
-            certifications, i = get_certifications(li, i)
-        if li[i] == "Honors-Awards":
-            honors, i = get_honors(li, i)
-        if li[i] == "Summary":
-            summary, i = get_summary(li, i)
-        if li[i] == "Languages":
-            languages, i = get_languages(li, i)
-
-    res["contact"] = contact
-    res["skills"] = skills
-    res["languages"] = languages
-    res["certifications"] = certifications
-    res["honors"] = honors
-    res["summary"] = summary
+    res = get_many(li)
 
     assert res == {
         "contact": [
