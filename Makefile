@@ -14,7 +14,6 @@ install:  ## install library
 # LINTS #
 #########
 lint:  ## run static analysis with black and flake8
-
 	python -m black --check Resume-Parser setup.py
 	python -m flake8 Resume-Parser setup.py --ignore=E501,F401
 
