@@ -18,6 +18,21 @@ TAGS = {
     "Education",
 }
 
+WEIRD = [
+    "\u00b7",
+    "\xa0",
+    "\uf0da",
+    "\x0c",
+    "• ",
+    "* ",
+    "(LinkedIn)",
+    " (LinkedIn)",
+    "\uf0a7",
+    "(Mobile)",
+    "-       ",
+    "●",
+]
+
 
 def get_contact(result_list, i):
     contact = []
@@ -151,21 +166,7 @@ def main(argv):
                 interpreter.process_page(page)
                 data = retstr.getvalue()
 
-    weird = [
-        "\u00b7",
-        "\xa0",
-        "\uf0da",
-        "\x0c",
-        "• ",
-        "* ",
-        "(LinkedIn)",
-        " (LinkedIn)",
-        "\uf0a7",
-        "(Mobile)",
-        "-       ",
-        "●",
-    ]
-    for i in weird:
+    for i in WEIRD:
         data = data.replace(i, "")
 
     result_list = data.split("\n")
