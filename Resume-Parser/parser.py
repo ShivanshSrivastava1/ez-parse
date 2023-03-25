@@ -1,10 +1,8 @@
-import sys
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 import io
-import getopt
 
 TAGS = {
     "Contact",
@@ -32,6 +30,28 @@ WEIRD = [
     "-       ",
     "●",
 ]
+
+
+def extract_pdf(fname):
+    imagewriter = None
+    caching = True
+    laparams = LAParams()
+    retstr = io.StringIO()
+    rsrcmgr = PDFResourceManager(caching=caching)
+    device = TextConverter(rsrcmgr, retstr, laparams=laparams, imagewriter=imagewriter)
+    data = []
+
+    with open(fname, "rb") as fp:
+        interpreter = PDFPageInterpreter(rsrcmgr, device)
+        for page in PDFPage.get_pages(fp, caching=caching, check_extractable=True):
+            interpreter.process_page(page)
+            data = retstr.getvalue()
+
+    for i in WEIRD:
+        data = data.replace(i, "")
+
+    result_list = data.split("\n")
+    return result_list
 
 
 def get_contact(result_list, i):
@@ -115,14 +135,9 @@ def get_languages(result_list, i):
 
 
 def get_many(result_list):
-    skills = []
-    languages = []
-    summary = []
-    certifications = []
-    honors = []
-    contact = []
-
+    skills, languages, summary, certifications, honors, contact = [], [], [], [], [], []
     res = {}
+
     for i in range(len(result_list)):
         if result_list[i] == "Contact":
             contact, i = get_contact(result_list, i)
@@ -137,41 +152,13 @@ def get_many(result_list):
         if result_list[i] == "Languages":
             languages, i = get_languages(result_list, i)
 
-    res["contact"] = contact
-    res["skills"] = skills
-    res["languages"] = languages
-    res["certifications"] = certifications
-    res["honors"] = honors
-    res["summary"] = summary
+    res = {
+        "contact": contact,
+        "skills": skills,
+        "languages": languages,
+        "certifications": certifications,
+        "honors": honors,
+        "summary": summary,
+    }
 
     return res
-
-
-def main(argv):
-    name = argv[1] + " " + argv[2]
-    TAGS.add(name)
-    (opts, args) = getopt.getopt(argv[3:], "dP:o:t:O:c:s:R:Y:p:m:SCnAVM:W:L:F:")
-    imagewriter = None
-    caching = True
-    laparams = LAParams()
-    retstr = io.StringIO()
-    rsrcmgr = PDFResourceManager(caching=caching)
-    device = TextConverter(rsrcmgr, retstr, laparams=laparams, imagewriter=imagewriter)
-    data = []
-
-    for fname in args:
-        with open(fname, "rb") as fp:
-            interpreter = PDFPageInterpreter(rsrcmgr, device)
-            for page in PDFPage.get_pages(fp, caching=caching, check_extractable=True):
-                interpreter.process_page(page)
-                data = retstr.getvalue()
-
-    for i in WEIRD:
-        data = data.replace(i, "")
-
-    result_list = data.split("\n")
-    return get_many(result_list)
-
-
-if __name__ == "__main__":
-    sys.exit(main(sys.argv))
