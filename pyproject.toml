@@ -7,7 +7,7 @@ requires = [
 build-backend="setuptools.build_meta"
 
 [project]
-name = "Resume-Parser"
+name = "ez-parse"
 authors = [{name = "Shivansh Srivastava", email = "ss5945@columbia.edu"}]
 description="A Python library for parsing PDFs of LinkedIn profiles"
 readme = "README.md"
