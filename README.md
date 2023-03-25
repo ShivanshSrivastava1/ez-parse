@@ -9,6 +9,8 @@ A Python library that scrapes essential information from PDFs of LinkedIn profil
 
 [![codecov](https://codecov.io/github/ShivanshSrivastava1/Resume-Parser/branch/main/graph/badge.svg?token=V4IKQ490DY)](https://codecov.io/github/ShivanshSrivastava1/Resume-Parser)
 
+[![PyPI](https://img.shields.io/pypi/v/ez_parse)](https://pypi.org/project/ez-parse/0.1.1/)
+
 [Project Board](https://github.com/users/ShivanshSrivastava1/projects/2/views/1)
 
 ## Overview
