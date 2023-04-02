@@ -33,6 +33,16 @@ WEIRD = [
 
 
 def extract_pdf(fname):
+    """Function that converts text in a PDF
+    to a list of strings.
+
+    Args:
+        fname (str): A string with the path to the PDF to be parsed.
+
+    Returns:
+        result_list (list): A list of strings with all the text in the PDF.
+
+    """
     imagewriter = None
     caching = True
     laparams = LAParams()
@@ -55,6 +65,19 @@ def extract_pdf(fname):
 
 
 def get_contact(result_list, i):
+    """Function that returns all the text
+    under the 'Contact' header as a list
+    of strings.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+        i (int): The current index in the list of strings.
+
+    Returns:
+        contact (list), j+1 (int): A tuple with 2 elements: a list of strings with all the information for the 'Contact' header, and an updated index after the parsing so that future parses don't contain duplicate information.
+
+    """
     contact = []
     for j in range(i + 1, len(result_list)):
         if len(result_list[j]) == 0:
@@ -68,6 +91,19 @@ def get_contact(result_list, i):
 
 
 def get_skills(result_list, i):
+    """Function that returns all the text
+    under the 'Skills' header as a list
+    of strings.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+        i (int): The current index in the list of strings.
+
+    Returns:
+        skills (list), j+1 (int): A tuple with 2 elements: a list of strings with all the information for the 'Skills' header, and an updated index after the parsing so that future parses don't contain duplicate information.
+
+    """
     skills = []
     for j in range(i + 1, len(result_list)):
         if len(result_list[j]) == 0:
@@ -81,6 +117,19 @@ def get_skills(result_list, i):
 
 
 def get_certifications(result_list, i):
+    """Function that returns all the text
+    under the 'Cerifications' header as a list
+    of strings.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+        i (int): The current index in the list of strings.
+
+    Returns:
+        certifications (list), j+1 (int): A tuple with 2 elements: a list of strings with all the information for the 'Cerifications' header, and an updated index after the parsing so that future parses don't contain duplicate information.
+
+    """
     certifications = []
     for j in range(i + 1, len(result_list)):
         if len(result_list[j]) == 0:
@@ -94,6 +143,19 @@ def get_certifications(result_list, i):
 
 
 def get_honors(result_list, i):
+    """Function that returns all the text
+    under the 'Honors' header as a list
+    of strings.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+        i (int): The current index in the list of strings.
+
+    Returns:
+        honors (list), j+1 (int): A tuple with 2 elements: a list of strings with all the information for the 'Honors' header, and an updated index after the parsing so that future parses don't contain duplicate information.
+
+    """
     honors = []
     for j in range(i + 1, len(result_list)):
         if len(result_list[j]) == 0:
@@ -107,6 +169,19 @@ def get_honors(result_list, i):
 
 
 def get_summary(result_list, i):
+    """Function that returns all the text
+    under the 'Summary' header as a list
+    of strings.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+        i (int): The current index in the list of strings.
+
+    Returns:
+        summary (list), j+1 (int): A tuple with 2 elements: a list of strings with all the information for the 'Summary' header, and an updated index after the parsing so that future parses don't contain duplicate information.
+
+    """
     summary = []
     summ = ""
     for j in range(i + 1, len(result_list)):
@@ -122,6 +197,19 @@ def get_summary(result_list, i):
 
 
 def get_languages(result_list, i):
+    """Function that returns all the text
+    under the 'Languages' header as a list
+    of strings.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+        i (int): The current index in the list of strings.
+
+    Returns:
+        languages (list), j+1 (int): A tuple with 2 elements: a list of strings with all the information for the 'Languages' header, and an updated index after the parsing so that future parses don't contain duplicate information.
+
+    """
     languages = []
     for j in range(i + 1, len(result_list)):
         if len(result_list[j]) == 0:
@@ -135,6 +223,19 @@ def get_languages(result_list, i):
 
 
 def get_many(result_list):
+    """Function that returns all the text
+    under the 'Contact', 'Skills', 
+    'Certifications', 'Honors', 'Summary', 
+    and 'Languages' headers as values of a
+    dictionary.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+    Returns:
+        res (dict): A dict that maps the header keys to lists of strings with the parsed text.
+
+    """
     skills, languages, summary, certifications, honors, contact = [], [], [], [], [], []
     res = {}
 
