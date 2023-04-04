@@ -33,3 +33,56 @@ You can extract the text data from the PDF like so:
 This parsed data can also be stored in a dictionary:
 
 `res = parser.get_many(data)`
+
+## Examples
+Below are some minimal examples of how the helper functions for each header work. Note how each helper function is designed to exclude information after encountering an irrelevant section header:
+
+1) get_contact
+
+`>>> li = ["999-999-9999", "Email", "URL", "Top Skills"]`
+
+`>>> print(get_contact(li, -1)[0])`
+
+`["999-999-9999", "Email", "URL"]`
+
+2) get_skills
+
+`>>> li = ["Python", "Java", "C++", "Certifications"]`
+
+`>>> print(get_skills(li, -1)[0])`
+
+`["Python", "Java", "C++"]`
+
+3) get_certifications
+
+`>>> li = ["QuickBooks", "CPR", "Bartending", "Honors-Awards"]`
+
+`>>> print(get_certifications(li, -1)[0])`
+
+`["QuickBooks", "CPR", "Bartending"]`
+
+4) get_honors
+
+`>>> li = ["USACO Gold", "USAMO Silver", "USACO Bronze"]`
+
+`>>> print(get_honors(li, -1)[0])`
+
+`["USACO Gold", "USAMO Silver", "USACO Bronze"]`
+
+5) get_summary
+
+`>>> li = ["A", "mysterious", "person.", "Languages"]`
+
+`>>> print(get_summary(li, -1)[0])`
+
+`["A", "mysterious", "person."]`
+
+6) get_languages
+
+`>>> li = ["English", "Spanish", "Latin"]`
+
+`>>> print(get_languages(li, -1)[0])`
+
+`["English", "Spanish", "Latin"]`
+
+For a more in-depth example that extracts text from the PDF and relies on all of these helper functions, please see the [documentation](https://shivanshsrivastava1.github.io/Resume-Parser/).
