@@ -3,6 +3,7 @@ from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 import io
+import json
 
 TAGS = {
     "Contact",
@@ -134,7 +135,7 @@ def get_languages(result_list, i):
             return languages, j + 1
 
 
-def get_many(result_list):
+def get_many(result_list, json_output=false):
     skills, languages, summary, certifications, honors, contact = [], [], [], [], [], []
     res = {}
 
@@ -161,4 +162,4 @@ def get_many(result_list):
         "summary": summary,
     }
 
-    return res
+    return res if not json_ouput else json.dumps(res, indent = 4)
