@@ -135,7 +135,7 @@ def get_languages(result_list, i):
             return languages, j + 1
 
 
-def get_many(result_list, json_output=false):
+def get_many(result_list, json_output=False):
     skills, languages, summary, certifications, honors, contact = [], [], [], [], [], []
     res = {}
 
@@ -162,4 +162,4 @@ def get_many(result_list, json_output=false):
         "summary": summary,
     }
 
-    return res if not json_ouput else json.dumps(res, indent = 4)
+    return res if not json_output else json.dumps(res, indent = 4)
