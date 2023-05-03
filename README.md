@@ -85,4 +85,4 @@ Below are some minimal examples of how the helper functions for each header work
 
 `["English", "Spanish", "Latin"]`
 
-For a more in-depth example that extracts text from the PDF and relies on all of these helper functions, please see the [documentation](https://shivanshsrivastava1.github.io/Resume-Parser/).
+For a more in-depth example that extracts text from the PDF and relies on all of these helper functions, please see the [documentation](https://img.shields.io/badge/docs-passing-brightgreen)](https://shivanshsrivastava1.github.io/ez-parse/).
