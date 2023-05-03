@@ -2,6 +2,7 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.pdfpage import PDFPage
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
+import json
 import io
 
 TAGS = {
@@ -224,8 +225,8 @@ def get_languages(result_list, i):
 
 def get_many(result_list):
     """Function that returns all the text
-    under the 'Contact', 'Skills', 
-    'Certifications', 'Honors', 'Summary', 
+    under the 'Contact', 'Skills',
+    'Certifications', 'Honors', 'Summary',
     and 'Languages' headers as values of a
     dictionary.
 
@@ -262,4 +263,47 @@ def get_many(result_list):
         "summary": summary,
     }
 
+    return res
+
+
+def get_json(result_list):
+    """Function that returns all the text
+    under the 'Contact', 'Skills',
+    'Certifications', 'Honors', 'Summary',
+    and 'Languages' headers in JSON format.
+
+    Args:
+        result_list (list): A list of strings to be parsed.
+
+    Returns:
+        res (JSON string): A JSON string that maps the header keys to lists of strings with the parsed text.
+
+    """
+    skills, languages, summary, certifications, honors, contact = [], [], [], [], [], []
+    temp = {}
+
+    for i in range(len(result_list)):
+        if result_list[i] == "Contact":
+            contact, i = get_contact(result_list, i)
+        if result_list[i] == "Top Skills":
+            skills, i = get_skills(result_list, i)
+        if result_list[i] == "Certifications":
+            certifications, i = get_certifications(result_list, i)
+        if result_list[i] == "Honors-Awards":
+            honors, i = get_honors(result_list, i)
+        if result_list[i] == "Summary":
+            summary, i = get_summary(result_list, i)
+        if result_list[i] == "Languages":
+            languages, i = get_languages(result_list, i)
+
+    temp = {
+        "contact": contact,
+        "skills": skills,
+        "languages": languages,
+        "certifications": certifications,
+        "honors": honors,
+        "summary": summary,
+    }
+
+    res = json.dumps(temp)
     return res
